@@ -1,5 +1,5 @@
 # Azure
-You can find the basic ARM templates for Azure Resources
+You can find the basic ARM templates for Azure Resources here
 
 I recommend you to go through the below links before getting started, if you are a beginner.
 
