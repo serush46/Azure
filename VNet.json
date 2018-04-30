@@ -29,8 +29,8 @@
     },
     "subnet1Name": {
       "type": "string",
-      "maxLength": 12,
-      "defaultValue": "Subnet1",
+      "maxLength": 9,
+      "defaultValue": "public",
       "metadata": {
         "description": "Subnet 1 Name"
       }
@@ -48,8 +48,8 @@
     },
     "subnet2Name": {
       "type": "string",
-      "maxLength": 12,
-      "defaultValue": "Subnet2",
+      "maxLength": 9,
+      "defaultValue": "private",
       "metadata": {
         "description": "Subnet 2 Name"
       }
