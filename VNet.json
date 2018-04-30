@@ -100,7 +100,7 @@
     },
     "subnetname": {
       "type": "string",
-      "value": "[variables('subnetName')]"
+      "value": "[variables('subnetName2')]"
     }
   }
 }
