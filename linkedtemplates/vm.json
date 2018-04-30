@@ -1,0 +1,170 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "numOfInstances" : {
+      "type" : "int",
+      "defaultValue" : 2
+    },
+        "virtualMachineName": {
+            "type": "string",
+            "metadata": {
+        "description": "Name of the VM"
+      }
+        },
+        "virtualMachineSize": {
+            "type": "string",
+            "defaultValue": "Standard_A2",
+            "metadata": {
+        "description": "Size of the VM"
+      }
+        },
+        "adminUsername": {
+            "type": "string",
+            "metadata": {
+        "description": "Admin username"
+      }
+        },
+        "diskSizeGB": { 
+            "type": "string",
+            "defaultValue": "30GB",
+             "metadata": {
+        "description": "Size of disk"
+      }},
+        "vnetName": {
+            "type": "string",
+             "metadata": {
+        "description": "Virtual Network Name"
+      }
+        },
+        "adminPassword": {
+            "type": "securestring",
+            "metadata": {
+        "description": "Admin password"
+      }
+        },
+        "diagnosticsStorageAccountName": {
+            "type": "string",
+           "defaultValue": "geeksvmdiagnostics",
+      "metadata": {
+        "description": "Storage account name"
+      } 
+        },
+        "subnetName": {
+            "type": "string",
+            "metadata": {
+        "description": "Subnet Name"
+      }
+        }
+    },
+    "variables": {
+        "vnetID": "[resourceId('Geeks_RG','Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
+        "subnetRef": "[concat(variables('vnetID'), '/subnets/', parameters('subnetName'))]",
+            "publicIPAddressType": "Dynamic",
+            "publicIPAddressName": "PubIP",
+            "nicName": "sureshNIC",
+            "location" : "[resourceGroup().location]"
+    },
+    "resources": [
+      {
+      "apiVersion": "2017-10-01",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[concat(variables('publicIPAddressName'),copyIndex())]",
+      "location": "[variables('location')]",
+      "copy" : {
+        "name" : "publicIpCopy",
+        "count" : "[parameters('numOfInstances')]"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "[variables('publicIPAddressType')]"
+      }
+    },
+    {
+      "apiVersion": "2017-10-01",
+      "type": "Microsoft.Network/networkInterfaces",
+      "name": "[concat(variables('nicName'), copyIndex())]",
+      "location": "[variables('location')]",
+      "copy" : {
+        "name" : "nicCopy",
+        "count" : "[parameters('numOfInstances')]"
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'), copyIndex())]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('publicIPAddressName'),copyIndex()))]"
+              },
+              "subnet": {
+                "id": "[variables('subnetRef')]"
+              }
+            }
+          }
+        ]
+      }
+    },
+        {
+            "name": "[parameters('virtualMachineName')]",
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2017-03-30",
+            "location": "[variables('location')]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
+            ],
+            "copy" : {
+        "name" : "vmCopy",
+        "count" : "[parameters('numOfInstances')]"
+      },
+            "properties": {
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachineName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]"
+                },
+                "hardwareProfile": {
+                    "vmSize": "[parameters('virtualMachineSize')]"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "Canonical",
+                        "offer": "UbuntuServer",
+                        "sku": "16.04-LTS",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "createOption": "FromImage",
+                        "diskSizeGB": "[parameters('diskSizeGB')]",
+                        "managedDisk": {
+                            "storageAccountType": "Premium_LRS"
+                        }
+                    },
+                    "dataDisks": []
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'), copyIndex())]"
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true,
+                        "storageUri": "[reference(resourceId('Geeks_RG', 'Microsoft.Storage/storageAccounts', parameters('diagnosticsStorageAccountName')), '2015-06-15').primaryEndpoints['blob']]"
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": {
+        "adminUsername": {
+            "type": "string",
+            "value": "[parameters('adminUsername')]"
+        }
+    }
+}
