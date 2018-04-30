@@ -58,7 +58,7 @@
         }
     },
     "variables": {
-        "vnetID": "[resourceId('Geeks_RG','Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
+        "vnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
         "subnetRef": "[concat(variables('vnetID'), '/subnets/', parameters('subnetName'))]",
             "publicIPAddressType": "Dynamic",
             "publicIPAddressName": "PubIP",
@@ -155,7 +155,7 @@
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
                         "enabled": true,
-                        "storageUri": "[reference(resourceId('Geeks_RG', 'Microsoft.Storage/storageAccounts', parameters('diagnosticsStorageAccountName')), '2015-06-15').primaryEndpoints['blob']]"
+                        "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('diagnosticsStorageAccountName')), '2015-06-15').primaryEndpoints['blob']]"
                     }
                 }
             }
