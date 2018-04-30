@@ -8,6 +8,7 @@
     },
         "virtualMachineName": {
             "type": "string",
+            "defaultValue": "ubuntu",
             "metadata": {
         "description": "Name of the VM"
       }
@@ -50,7 +51,7 @@
         "description": "Storage account name"
       } 
         },
-        "subnetName": {
+        "subnetName2": {
             "type": "string",
             "metadata": {
         "description": "Subnet Name"
@@ -59,7 +60,7 @@
     },
     "variables": {
         "vnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
-        "subnetRef": "[concat(variables('vnetID'), '/subnets/', parameters('subnetName'))]",
+        "subnetRef": "[concat(variables('vnetID'), '/subnets/', parameters ('subnetName2'))]",
             "publicIPAddressType": "Dynamic",
             "publicIPAddressName": "PubIP",
             "nicName": "sureshNIC",
