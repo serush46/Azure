@@ -22,7 +22,7 @@
         },
         "adminUsername": {
             "type": "string",
-            "defaultValue" : "",
+            "defaultValue" : "suresh",
             "metadata": {
         "description": "Admin username"
       }
