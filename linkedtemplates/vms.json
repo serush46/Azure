@@ -145,13 +145,13 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', variables('nicName'), copyIndex()))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'), copyIndex())]"
                         }
                     ]
                 },
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
-                        "enabled": "false"
+                        "enabled": false
                     }
                 }
             }
