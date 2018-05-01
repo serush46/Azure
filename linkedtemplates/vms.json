@@ -40,6 +40,7 @@
         },
         "adminPassword": {
             "type": "securestring",
+            "value": "null"
             "metadata": {
         "description": "Admin password"
       }
