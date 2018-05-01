@@ -15,14 +15,14 @@
         },
         "virtualMachineSize": {
             "type": "string",
-            "defaultValue": "Standard_A2",
+            "defaultValue": "Standard_A1",
             "metadata": {
         "description": "Size of the VM"
       }
         },
-        "adminUsernames": {
+        "adminUsername": {
             "type": "string",
-            "defaultValue": "suresh",
+            "value" : "suresh",
             "metadata": {
         "description": "Admin username"
       }
@@ -39,8 +39,9 @@
         "description": "Virtual Network Name"
       }
         },
-        "adminPasswords": {
+        "adminPassword": {
             "type": "securestring",
+            "value" : "Suresh@123!@" ,
             "metadata": {
         "description": "Admin password"
       }
@@ -52,7 +53,7 @@
         "description": "Storage account name"
       } 
         },
-        "subnetName": {
+        "subnet2Name": {
             "type": "string",
             "metadata": {
         "description": "Subnet Name"
@@ -60,8 +61,8 @@
         }
     },
     "variables": {
-        "vnetID": "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]",
-        "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/', parameters('subnet2Name'))]",
+        "vnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
+        "subnetRef": "[concat(variables('vnetID'), '/subnets/', parameters ('subnet2Name'))]",
             "publicIPAddressType": "Dynamic",
             "publicIPAddressName": "PubIP",
             "nicName": "sureshNIC",
@@ -100,7 +101,7 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('publicIPAddressName'),copyIndex()))]"
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('publicIPAddressName'), copyIndex()))]"
               },
               "subnet": {
                 "id": "[variables('subnetRef')]"
@@ -111,12 +112,12 @@
       }
     },
         {
-            "name": "[parameters('virtualMachineName')]",
+            "name": "concat(parameters('virtualMachineName'), copyIndex())]",
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2017-03-30",
             "location": "[variables('location')]",
             "dependsOn": [
-                "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
+                "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), copyIndex())]"
             ],
             "copy" : {
         "name" : "vmCopy",
@@ -125,8 +126,8 @@
             "properties": {
                 "osProfile": {
                     "computerName": "[parameters('virtualMachineName')]",
-                    "adminUsername": "[parameters('adminUsernames')]",
-                    "adminPassword": "[parameters('adminPasswords')]"
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]"
                 },
                 "hardwareProfile": {
                     "vmSize": "[parameters('virtualMachineSize')]"
@@ -150,7 +151,7 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'), copyIndex())]"
+                            "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', variables('nicName'), copyIndex()))]"
                         }
                     ]
                 },
