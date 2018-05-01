@@ -59,8 +59,8 @@
         }
     },
     "variables": {
-        "vnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
-        "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks', parameters('subnet2Name'))]",
+        "vnetID": "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]",
+        "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/', parameters('subnet2Name'))]",
             "publicIPAddressType": "Dynamic",
             "publicIPAddressName": "PubIP",
             "nicName": "sureshNIC",
