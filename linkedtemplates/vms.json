@@ -8,7 +8,7 @@
     },
         "virtualMachineSize": {
             "type": "string",
-            "defaultValue": "Standard_A1",
+            "defaultValue": "Standard_A2",
             "metadata": {
         "description": "Size of the VM"
       }
@@ -21,7 +21,7 @@
         },
         "diskSizeGB": { 
             "type": "string",
-            "defaultValue": "30GB",
+            "defaultValue": "30 GiB",
              "metadata": {
         "description": "Size of disk"
       }},
