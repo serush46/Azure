@@ -106,7 +106,7 @@
       }
     },
         {
-            "name": "concat(parameters('virtualMachineName'), copyIndex())]",
+            "name": "[concat(parameters('virtualMachineName'), copyIndex())]",
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2017-03-30",
             "location": "[variables('location')]",
