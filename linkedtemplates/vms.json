@@ -22,7 +22,6 @@
         },
         "adminUsername": {
             "type": "string",
-            "defaultValue": "suresh",
             "metadata": {
         "description": "Admin username"
       }
@@ -35,6 +34,7 @@
       }},
         "vnetName": {
             "type": "string",
+            "defaultValue": "VNet",
              "metadata": {
         "description": "Virtual Network Name"
       }
@@ -54,6 +54,7 @@
         },
         "subnet2Name": {
             "type": "string",
+            "defaultValue": "private",
             "metadata": {
         "description": "Subnet Name"
       }
