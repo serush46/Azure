@@ -8,7 +8,7 @@
     },
         "virtualMachineSize": {
             "type": "string",
-            "defaultValue": "Standard_A2",
+            "defaultValue": "Standard_D2S_V3",
             "metadata": {
         "description": "Size of the VM"
       }
