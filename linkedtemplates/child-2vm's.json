@@ -51,7 +51,7 @@
         "description": "Storage account name"
       } 
         },
-        "subnet2Name": {
+        "subnetName": {
             "type": "string",
             "metadata": {
         "description": "Subnet Name"
@@ -60,7 +60,7 @@
     },
     "variables": {
         "vnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
-        "subnetRef": "[concat(variables('vnetID'), '/subnets/', parameters ('subnet2Name'))]",
+        "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks', parameters('subnet2Name'))]",
             "publicIPAddressType": "Dynamic",
             "publicIPAddressName": "PubIP",
             "nicName": "sureshNIC",
