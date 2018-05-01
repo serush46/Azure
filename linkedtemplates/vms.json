@@ -20,7 +20,7 @@
       }
         },
         "diskSizeGB": { 
-            "type": "int",
+            "type": "string",
              "metadata": {
         "description": "Size of disk"
       }},
