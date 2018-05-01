@@ -22,7 +22,6 @@
         },
         "adminUsername": {
             "type": "string",
-            "defaultValue" : "suresh",
             "metadata": {
         "description": "Admin username"
       }
@@ -41,7 +40,6 @@
         },
         "adminPassword": {
             "type": "securestring",
-            "defaultValue" : "" ,
             "metadata": {
         "description": "Admin password"
       }
