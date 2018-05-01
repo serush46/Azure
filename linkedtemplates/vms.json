@@ -22,7 +22,6 @@
         },
         "adminUsername": {
             "type": "string",
-            "value" : "suresh",
             "metadata": {
         "description": "Admin username"
       }
