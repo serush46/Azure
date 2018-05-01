@@ -4,6 +4,5 @@
     "parameters": {
       "adminPassword" : { "value" : "Suresh@12345" },
       "adminUsername" : { "value" : "suresh" },
-      "diskSizeGB" : { "value" : 30 }
     }
 }
