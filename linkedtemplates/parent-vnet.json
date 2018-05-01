@@ -56,16 +56,20 @@
     }
   },
   "variables": {
-    "subnetName": "[concat(toLower(parameters('subnet1Name')), uniqueString('vnetName().id'))]",
-    "subnetName2": "[concat(toLower(parameters('subnet2Name')), uniqueString('vnetName().id'))]",
-    "templateBaseUrl": "https://raw.githubusercontent.com/serush46/Azure/master/linkedtemplates/",
-    "secondTemplate" : "[concat(variables('templateBaseUrl'),'vms.json')]"    },
+    "templateBaseUrl": "https://rawgit.com/serush46/Azure/master/linkedtemplates/",
+    "secondTemplate" : {
+      "templateUrl" : "[concat(variables('templateBaseUrl'),'vms.json')]",
+      "paramUrl" : "[concat(variables('templateBaseUrl'),'vms-param.json')]"
+    },
+    "location": "[resourceGroup().location]",
+    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vnetName'))]"
+  },
   "resources": [
     {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Network/virtualNetworks",
       "name": "[parameters('vnetName')]",
-      "location": "[resourceGroup().location]",
+      "location": "[variables('location')]",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
@@ -79,13 +83,13 @@
         },
         "subnets": [
           {
-            "name": "[variables('subnetName')]",
+            "name": "[parameters('subnet1Name')]",
             "properties": {
               "addressPrefix": "[parameters('subnet1Prefix')]"
             }
           },
           {
-            "name": "[variables('subnetName2')]",
+            "name": "[parameters('subnet2Name')]",
             "properties": {
               "addressPrefix": "[parameters('subnet2Prefix')]"
             }
@@ -98,13 +102,16 @@
       "name": "WebServer",
       "apiVersion": "2017-05-10",
       "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworks/', variables('subnetName2'))]",
         "[concat('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]"
       ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(variables('secondTemplate'))]",
+          "uri": "[variables('secondTemplate').templateUrl]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parametersLink": {
+          "uri": "[variables('secondTemplate').paramUrl]",
           "contentVersion": "1.0.0.0"
         }
       }
@@ -115,9 +122,9 @@
       "type": "string",
       "value": "[parameters('vnetName')]"
     },
-    "subnetname": {
+    "subnetsname": {
       "type": "string",
-      "value": "[variables('subnetName2')]"
+      "value": "[parameters('subnet2Name')]"
     }
   }
 }
