@@ -41,7 +41,7 @@
         },
         "adminPassword": {
             "type": "securestring",
-            "defaultvalue" : "Suresh@123!@" ,
+            "value" : "" ,
             "metadata": {
         "description": "Admin password"
       }
