@@ -21,7 +21,10 @@
       }
         },
         "adminUsername": {
-            "type": "string"
+            "type": "string",
+            "metadata": {
+        "description": "Admin username"
+      }
         },
         "diskSizeGB": { 
             "type": "string",
@@ -37,7 +40,10 @@
       }
         },
         "adminPassword": {
-            "type": "securestring"
+            "type": "securestring",
+            "metadata": {
+        "description": "Admin password"
+      }
         },
         "diagnosticsStorageAccountName": {
             "type": "string",
