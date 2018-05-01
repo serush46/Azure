@@ -20,7 +20,7 @@
         "description": "Size of the VM"
       }
         },
-        "adminUsername": {
+        "adminUsernames": {
             "type": "string",
             "defaultValue": "suresh",
             "metadata": {
@@ -39,7 +39,7 @@
         "description": "Virtual Network Name"
       }
         },
-        "adminPassword": {
+        "adminPasswords": {
             "type": "securestring",
             "metadata": {
         "description": "Admin password"
@@ -125,8 +125,8 @@
             "properties": {
                 "osProfile": {
                     "computerName": "[parameters('virtualMachineName')]",
-                    "adminUsername": "[parameters('adminUsername')]",
-                    "adminPassword": "[parameters('adminPassword')]"
+                    "adminUsername": "[parameters('adminUsernames')]",
+                    "adminPassword": "[parameters('adminPasswords')]"
                 },
                 "hardwareProfile": {
                     "vmSize": "[parameters('virtualMachineSize')]"
