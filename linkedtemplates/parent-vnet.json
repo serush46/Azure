@@ -59,7 +59,7 @@
     "subnetName": "[concat(toLower(parameters('subnet1Name')), uniqueString('vnetName().id'))]",
     "subnetName2": "[concat(toLower(parameters('subnet2Name')), uniqueString('vnetName().id'))]",
     "templateBaseUrl": "https://rawgit.com/serush46/Azure/master/linkedtemplates/",
-    "secondTemplate" : "[concat(variables('templateBaseUrl'),'vm.json')]"    },
+    "secondTemplate" : "[concat(variables('templateBaseUrl'),'child-2vm's.json')]"    },
   "resources": [
     {
       "apiVersion": "2015-06-15",
