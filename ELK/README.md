@@ -5,5 +5,4 @@
 ## Steps
 * kubectl create -f ELK/
 * Run a cluster with sufficient resources (3x Standard B2ms at least on Azure)
-* Make sure to label nodes with beta.kubernetes.io/fluentd-ds-ready=true (i.e) 
-for i in `kubectl get node | cut -d ' ' -f 1| grep agentpool` ; do kubectl label nodes ${i} beta.kubernetes.io/fluentd-ds-ready=true ; done
+* Make sure to label nodes with beta.kubernetes.io/fluentd-ds-ready=true (or) Execute this script: ./label.sh
