@@ -1,4 +1,4 @@
-# Kubernetes logging
+# Kubernetes logging on Azure using EFK(ELK)
 ## EFK - Elasticsearch, Fluentd, Kibana
 * These files are modified from https://github.com/kubernetes/kubernetes/blob/master/cluster/addons/fluentd-elasticsearch to add persistent storage and kibana plugins
 
