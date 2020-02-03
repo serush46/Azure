@@ -14,7 +14,7 @@ BigKahuna (Slack - _Slash Commands_) _Usage Manual_
 - [Cluster Upgrade](#cluster-upgrade)
     - [Block a cluster from autoupgrade](#block-cluster)
     - [Unblock a cluster to autoupgrade](#unblock-cluster)
-- [Cluster OPS - JIRA tickets](#cluster-ops-jira-tickets)
+- [Cluster OPS (JIRA)](#cluster-ops-jira-tickets)
     - [Create JIRA tickets](#create-jira-tickets)
 
 - [Pager Duty Integration](#pager-duty-integration)
@@ -131,7 +131,7 @@ All small_production and large_production clusters are blocked by default on cer
 ```
 
 ----
-## Cluster OPS - JIRA tickets
+## Cluster OPS (JIRA)
 
 ### Create JIRA tickets
 ```
