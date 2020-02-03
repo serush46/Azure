@@ -158,7 +158,7 @@ e.g
 /cluster ticket downsize_pri for varca as comments the SSD is greater than 1 GB
 /cluster ticket downsize_sec for varca as comments the SSD is greater than 1 GB
 ```
-- **Allowed special characters (in Comments)** : '.,-_!&@%>< '
+- **Allowed special characters (in Comments)** : -_!&@%><: ,.
 
 ----
 
